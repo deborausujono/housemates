@@ -1,4 +1,8 @@
 Housemates::Application.routes.draw do
+  root to: "houses#index"
+
+  devise_for :people
+
   resources :houses
 
 
