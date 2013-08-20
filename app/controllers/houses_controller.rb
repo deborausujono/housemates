@@ -1,4 +1,6 @@
 class HousesController < ApplicationController
+  skip_before_filter :authenticate_user!
+
   # GET /houses
   # GET /houses.json
   def index

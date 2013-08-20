@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130820131641) do
+ActiveRecord::Schema.define(:version => 20130820220036) do
 
   create_table "houses", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(:version => 20130820131641) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "notes", :force => true do |t|
+    t.text     "text"
+    t.integer  "person_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "notes", ["person_id"], :name => "index_notes_on_person_id"
 
   create_table "people", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -35,9 +44,11 @@ ActiveRecord::Schema.define(:version => 20130820131641) do
     t.datetime "updated_at",                             :null => false
     t.string   "name"
     t.boolean  "public"
+    t.integer  "house_id"
   end
 
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
+  add_index "people", ["house_id"], :name => "index_people_on_house_id"
   add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
 
 end

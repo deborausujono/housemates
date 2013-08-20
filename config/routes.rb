@@ -1,10 +1,15 @@
 Housemates::Application.routes.draw do
-  root to: "houses#index"
-
-  devise_for :people
+  resources :notes
 
   resources :houses
 
+  devise_for :people
+
+  authenticated :person do
+    root to: "notes#index"
+  end
+
+  root to: "houses#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
