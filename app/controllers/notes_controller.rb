@@ -2,11 +2,15 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    unless current_person.house
+      redirect_to new_house_path
+    else
+      @notes = Note.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @notes }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @notes }
+      end
     end
   end
 

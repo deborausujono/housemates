@@ -1,4 +1,6 @@
 Housemates::Application.routes.draw do
+  get "people/post_sign_up"
+
   get "welcome/index"
 
   resources :notes

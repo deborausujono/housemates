@@ -45,11 +45,12 @@
 
                 <ul class="dropdown-menu">
                   <li><%= link_to 'Settings', edit_person_registration_path %></li>
-                  <li><%= link_to 'Log Out', destroy_person_session_path %></li>
+                  <li><%= link_to 'Log Out', destroy_person_session_path, method: :delete %></li>
                 </ul>
               </li>
             </ul>
           <% else %><!--render "welcome/navbar"-->
+            <!--render "shared/sign_in_form", class: "navbar..."-->
             <%= form_for resource,
                          as: resource_name,
                          url: session_path(resource_name),
@@ -74,10 +75,12 @@
     </div>
   </div>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <div class="container-fluid">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
-  <%= yield %>
+    <%= yield %>
+  </div>
 
 </body>
 </html>
