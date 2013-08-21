@@ -25,7 +25,7 @@
         <!-- Everything you want hidden at 940px or less, place within here -->
         <div class="nav-collapse collapse">
           <!-- .nav, .navbar-search, .navbar-form, etc -->
-          <% if person_signed_in? %>
+          <% if person_signed_in? %><!--render "shared/navbar"-->
             <ul class="nav">
               <li class="<%= 'active' if current_page?(houses_path) %>"><%= link_to 'Whiteboard', houses_path %></li>
               <li><%= link_to 'Chore Wheel', '#' %></li>
@@ -49,15 +49,24 @@
                 </ul>
               </li>
             </ul>
-          <% else %>
-            <form class="navbar-form pull-right">
-              <input type="text" class="span2" placeholder="Email">
-              <input type="password" class="span2" placeholder="Password">
-              <label class="checkbox inline">
-                <input type="checkbox"> Remember me
-              </label>
-              <button type="submit" class="btn">Sign in</button>
-            </form>
+          <% else %><!--render "welcome/navbar"-->
+            <%= form_for resource,
+                         as: resource_name,
+                         url: session_path(resource_name),
+                         html: { class: "navbar-form pull-right" } do |f| %>
+              
+              <%= f.email_field :email, class: "span2", placeholder: "Email" %>
+
+              <%= f.password_field :password, class: "span2", placeholder: "Password" %>
+
+              <% if devise_mapping.rememberable? -%>
+                <%= f.label :remember_me, class: "checkbox inline" do %>
+                  <%= f.check_box :remember_me %> Remember me
+                <% end %>
+              <% end -%>
+
+              <%= f.submit "Sign in", class: "btn" %>
+            <% end %>
           <% end %>
         </div>
  
