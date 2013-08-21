@@ -1,5 +1,5 @@
 class HousesController < ApplicationController
-  skip_before_filter :authenticate_user!
+  skip_before_filter :authenticate_person!
 
   # GET /houses
   # GET /houses.json
