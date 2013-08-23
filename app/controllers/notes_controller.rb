@@ -3,9 +3,11 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     unless current_person.house
-      redirect_to new_house_path
+      redirect_to move_in_houses_path
     else
-      @notes = Note.all
+      @notes = Note.joins(:person).where("people.house_id = ? ", current_person.house_id)
+                                  .order("updated_at DESC")
+      @note = Note.new
 
       respond_to do |format|
         format.html # index.html.erb
@@ -48,7 +50,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
         format.json { render json: @note, status: :created, location: @note }
       else
         format.html { render action: "new" }

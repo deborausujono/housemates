@@ -1,25 +1,35 @@
-<h1>Listing notes</h1>
-
-<table>
-  <tr>
-    <th>Text</th>
-    <th>Person</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @notes.each do |note| %>
-  <tr>
-    <td><%= note.text %></td>
-    <td><%= note.person %></td>
-    <td><%= link_to 'Show', note %></td>
-    <td><%= link_to 'Edit', edit_note_path(note) %></td>
-    <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Note', new_note_path %>
+<div class="row-fluid">
+  <div class="span8">
+    <!--Body content-->
+    <div class="row-fluid">
+      <div class="span4">
+        <!--New note form-->
+        <%= render 'form' %>
+      </div>
+      <% @notes.each_with_index do |note, i| %>  
+        <% if (i+1)%3==0 %><div class="row-fluid"><% end %>
+        <div class="span4">
+          <p><%= note.text %></p>
+          <p class="text-right">
+            <small><%= note.person.name %></small><br>
+            <small><%= note.updated_at %></small>
+          </p>
+          <p><%= link_to 'Show', note %> |
+            <%= link_to 'Edit', edit_note_path(note) %> |
+            <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </p>
+        </div>
+        <% if (i+1)%3==2 or i==@notes.length-1 %></div><% end %>
+      <% end %>
+    <% if @notes.empty? %></div><% end %>
+    <!--If @notes.length==0/@notes.empty?: close </div> tag here-->
+  </div>
+  <div class="span4 well">
+    <!--Sidebar content, move to partial shared/house_sidebar-->
+    <h3><%= current_person.house.name %></h3>
+    <hr>
+    <% current_person.house.people.each do |resident| %>
+      <%= resident.name %><br>
+    <% end %>
+  </div>
+</div>

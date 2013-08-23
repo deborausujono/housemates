@@ -11,15 +11,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :public %><br />
-    <%= f.check_box :public %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.text_field :name, class: "input-block-level", placeholder: "House name" %>
+  <%= f.label :public, class: "checkbox" do %>
+    <%= f.check_box :public %> Anyone can move into the house, no approval necessary
+  <% end %>
+  <%= f.submit "Create house and move in", class: "btn" %>
 <% end %>

@@ -3,7 +3,16 @@ Housemates::Application.routes.draw do
 
   resources :notes
 
-  resources :houses
+  resources :houses do
+    member do
+      get :join
+    end
+
+    collection do
+      get :move_in
+      get :pre_join
+    end
+  end
 
   devise_for :people
 

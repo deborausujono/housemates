@@ -1,0 +1,17 @@
+<div class="row-fluid">
+  <div class="medium-center">
+    <h2 class="text-center">Move into a house to start using Housemates</h2>
+    <br>
+
+    <p class="lead text-center">Move into an existing house</p>
+    <%= form_tag pre_join_houses_path, method: "get" do %>
+      <%= text_field_tag :name, nil, class: "input-block-level", placeholder: "Enter house name" %>
+      <%= submit_tag "Move in", class: "btn btn-primary" %>
+    <% end %>
+
+    <hr>
+    <p class="lead text-center">or create a new one</p>
+    <%= render 'form' %>
+
+  </div>
+</div>

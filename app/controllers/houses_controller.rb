@@ -44,6 +44,7 @@ class HousesController < ApplicationController
 
     respond_to do |format|
       if @house.save
+        current_person.update_attribute(:house_id, @house.id)
         format.html { redirect_to @house, notice: 'House was successfully created.' }
         format.json { render json: @house, status: :created, location: @house }
       else
@@ -78,6 +79,31 @@ class HousesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to houses_url }
       format.json { head :no_content }
+    end
+  end
+
+  def move_in
+    @houses = House.all
+    @house = House.new
+  end
+
+  def pre_join
+    @house = House.where('lower(name) = ?', params[:name].downcase).first
+    redirect_to action: :join, id: @house.to_param
+  end
+
+  def join
+    @house = House.find(params[:id])
+    current_person.update_attribute(:house_id, @house.id)
+
+    respond_to do |format|
+      if @house.update_attributes(params[:house])
+        format.html { redirect_to root_path, notice: 'Successfully moved in.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @house.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

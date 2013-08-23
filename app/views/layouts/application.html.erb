@@ -19,7 +19,7 @@
         </a>
  
         <!-- Be sure to leave the brand out there if you want it shown -->
-        <%= link_to 'housemates', '#', class: 'brand' %>
+        <%= link_to 'housemates', root_path, class: 'brand' %>
         <!--<a class="brand" href="#">housemates</a>-->
  
         <!-- Everything you want hidden at 940px or less, place within here -->
@@ -27,7 +27,7 @@
           <!-- .nav, .navbar-search, .navbar-form, etc -->
           <% if person_signed_in? %><!--render "shared/navbar"-->
             <ul class="nav">
-              <li class="<%= 'active' if current_page?(houses_path) %>"><%= link_to 'Whiteboard', houses_path %></li>
+              <li class="<%= 'active' if current_page?(notes_path) %>"><%= link_to 'Whiteboard', notes_path %></li>
               <li><%= link_to 'Chore Wheel', '#' %></li>
               <li><%= link_to 'Expenses', '#' %></li>
               <li><%= link_to 'Inventory', '#' %></li>
@@ -76,8 +76,8 @@
   </div>
 
   <div class="container-fluid">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if notice %><p class="notice"><%= notice %></p><% end %>
+    <% if alert %><p class="alert"><%= alert %></p><% end %>
 
     <%= yield %>
   </div>

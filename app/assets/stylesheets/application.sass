@@ -12,13 +12,27 @@
  *= require_tree .
  */
 
+$linkColor: rgb(132, 215, 103)
+$navbarBrandColor: rgb(255, 153, 0)
+
 @import "bootstrap"
-@import "bootstrap-responsive"
+
+$medium-width: 50%
 
 body
-	padding-top: 60px
-	background-color: #f5f5f5
+	padding-top: 90px
 
 .container-fluid
 	padding-right: 10%
 	padding-left: 10%
+
+.medium-center
+	margin: auto
+	max-width: $medium-width
+
+.navbar
+	.brand
+		font:
+			size: 32px
+
+@import "bootstrap-responsive"
