@@ -9,6 +9,10 @@
       <% @notes.each_with_index do |note, i| %>  
         <% if (i+1)%3==0 %><div class="row-fluid"><% end %>
         <div class="span4">
+  <!--f.hidden_field :person_id, value: current_person.id-->
+
+          <%= best_in_place note, :text, type: :textarea, ok_button: 'Save', cancel_button: 'Cancel',
+                            ok_button_class: "btn btn-primary", cancel_button_class: "btn" %>
           <p><%= note.text %></p>
           <p class="text-right">
             <small><%= note.person.name %></small><br>

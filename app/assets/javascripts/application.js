@@ -15,3 +15,10 @@
 //= require_tree .
 //= require bootstrap-dropdown
 //= require bootstrap-collapse
+//= require best_in_place
+//= require best_in_place.purr
+
+$(document).ready(function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
+});
