@@ -1,0 +1,20 @@
+// Place all the styles related to the Notes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$gray: #f5f5f5
+
+li.note-cell:hover
+	background-color: $gray
+
+.thumbnail
+	border: 0
+	box-shadow: none
+
+ul.thumbnails
+	li.note-cell:nth-child(3n+4)
+		clear: left
+		margin-left: 0
+
+p.signature
+	color: darken($gray, 50%)
