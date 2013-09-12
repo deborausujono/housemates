@@ -1,16 +1,23 @@
 Housemates::Application.routes.draw do
   get "welcome/index"
 
-  resources :notes
+  resources :notes do
+    member do
+      get :cancel_edit
+    end
+  end
 
   resources :houses do
     member do
       get :join
+      get :leave
+      get :add
     end
 
     collection do
       get :move_in
       get :pre_join
+      get :pre_add
     end
   end
 

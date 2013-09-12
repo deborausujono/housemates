@@ -1,39 +1,45 @@
 <div class="row-fluid">
   <div class="span8">
-    <!--Body content-->
-    <div class="row-fluid">
-      <div class="span4">
-        <!--New note form-->
-        <%= render 'form' %>
-      </div>
-      <% @notes.each_with_index do |note, i| %>  
-        <% if (i+1)%3==0 %><div class="row-fluid"><% end %>
-        <div class="span4">
-  <!--f.hidden_field :person_id, value: current_person.id-->
 
-          <%= best_in_place note, :text, type: :textarea, ok_button: 'Save', cancel_button: 'Cancel',
-                            ok_button_class: "btn btn-primary", cancel_button_class: "btn" %>
-          <p><%= note.text %></p>
-          <p class="text-right">
-            <small><%= note.person.name %></small><br>
-            <small><%= note.updated_at %></small>
-          </p>
-          <p><%= link_to 'Show', note %> |
-            <%= link_to 'Edit', edit_note_path(note) %> |
-            <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </p>
+    <!--Whiteboard-->
+    <ul class="thumbnails" id="editable-list">
+      <!--New note form-->
+      <li class="span4">
+        <div class="thumbnail">
+          <%= render 'new' %>
         </div>
-        <% if (i+1)%3==2 or i==@notes.length-1 %></div><% end %>
+      </li>
+
+      <!--Index of notes-->
+      <% @notes.each do |note| %>
+        <li class="span4 note-cell">
+          <div class="thumbnail" id="note-container">
+            <%= render partial: "show", locals: {note: note} %>
+          </div>
+        </li>
       <% end %>
-    <% if @notes.empty? %></div><% end %>
-    <!--If @notes.length==0/@notes.empty?: close </div> tag here-->
+    </ul>
+    
   </div>
   <div class="span4 well">
     <!--Sidebar content, move to partial shared/house_sidebar-->
     <h3><%= current_person.house.name %></h3>
     <hr>
     <% current_person.house.people.each do |resident| %>
-      <%= resident.name %><br>
+      <p><%= gravatar_for resident %>
+      <%= resident.name %></p>
     <% end %>
+
+    <p>
+      <%= form_tag pre_add_houses_path, method: "get" do %>
+        <%= text_field_tag :email, nil, class: "input-block-level", placeholder: "Enter email to add a housemate" %>
+        <%= submit_tag "Add", class: "btn btn-warning" %>
+      <% end %>
+    </p>
+
+    <p>
+      <%= link_to raw('<i class="icon-briefcase"></i> Move out'),
+                  leave_house_path(current_person.house) %>
+    </p>
   </div>
 </div>

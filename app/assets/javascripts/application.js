@@ -15,6 +15,7 @@
 //= require_tree .
 //= require bootstrap-dropdown
 //= require bootstrap-collapse
+//= require bootstrap-modal
 //= require best_in_place
 //= require best_in_place.purr
 
