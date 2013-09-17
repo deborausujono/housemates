@@ -5,8 +5,7 @@ class NotesController < ApplicationController
     unless current_person.house
       redirect_to move_in_houses_path
     else
-      @notes = Note.joins(:person).where("people.house_id = ? ", current_person.house_id)
-                                  .order("updated_at DESC")
+      @notes = current_person.house.notes
       @note = Note.new
 
       respond_to do |format|
@@ -62,7 +61,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
+        format.html { redirect_to house_path(@note.house_id), notice: 'Note was successfully created.' }
         format.json { render json: @note, status: :created, location: @note }
       else
         format.html { render action: "new" }
@@ -79,7 +78,7 @@ class NotesController < ApplicationController
     if params[:submit_button]
       respond_to do |format|
         if @note.update_attributes(params[:note])
-          format.html { redirect_to notes_path, notice: 'Note was successfully updated.' }
+          format.html { redirect_to house_path(@note.house_id), notice: 'Note was successfully updated.' }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }
@@ -100,7 +99,7 @@ class NotesController < ApplicationController
     @note.destroy
 
     respond_to do |format|
-      format.html { redirect_to notes_url }
+      format.html { redirect_to house_path(@note.house_id) }
       format.json { head :no_content }
     end
   end

@@ -2,11 +2,16 @@ class HousesController < ApplicationController
   # GET /houses
   # GET /houses.json
   def index
-    @houses = House.all
+    if current_person.houses.empty?
+      redirect_to move_in_houses_path
+    else
+      @houses = current_person.houses
+      @house = House.new
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @houses }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @houses }
+      end
     end
   end
 
@@ -14,6 +19,8 @@ class HousesController < ApplicationController
   # GET /houses/1.json
   def show
     @house = House.find(params[:id])
+    @notes = @house.notes.order('updated_at DESC')
+    @note = Note.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -44,7 +51,7 @@ class HousesController < ApplicationController
 
     respond_to do |format|
       if @house.save
-        current_person.update_attribute(:house_id, @house.id)
+        current_person.houses << @house
         format.html { redirect_to root_path, notice: 'House was successfully created.' }
         format.json { render json: @house, status: :created, location: @house }
       else
@@ -94,13 +101,14 @@ class HousesController < ApplicationController
 
   def pre_add
     @person = Person.where('lower(email) = ?', params[:email].downcase).first
-    redirect_to action: :add, id: current_person.house_id,
+    #@house = House.find()
+    redirect_to action: :add, id: params[:house_id],
                 flash: { person_id: @person.to_param }
   end
 
   def join
     @house = House.find(params[:id])
-    current_person.update_attribute(:house_id, @house.id)
+    current_person.houses << @house
 
     respond_to do |format|
       if @house.update_attributes(params[:house])
@@ -116,11 +124,11 @@ class HousesController < ApplicationController
   def add
     @house = House.find(params[:id])
     @person = Person.find(params[:flash][:person_id])
-    @person.update_attribute(:house_id, @house.id)
+    @person.houses << @house
 
     respond_to do |format|
       if @house.update_attributes(params[:house])
-        format.html { redirect_to root_path, notice: 'Successfully moved in.' }
+        format.html { redirect_to @house, notice: 'Successfully moved in.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -131,7 +139,7 @@ class HousesController < ApplicationController
 
   def leave
     @house = House.find(params[:id])
-    current_person.update_attribute(:house_id, nil)
+    current_person.houses.delete(@house)
     redirect_to root_path
   end
 end

@@ -1,25 +1,32 @@
-<h1>Listing houses</h1>
+<div class="row-fluid">
+  <div class="span8">
+<!--Index of user's houses-->
+    <ul class="thumbnails">
+      <% @houses.each do |house| %>
+        <li class="span4 note-cell">
+          <div class="thumbnail">
+            <h4><%= link_to house.name, house %></h4>
+            <p><% house.people.take(5).each do |resident| %>
+              <%= gravatar_for resident %>
+            <% end %></p>
+            <%= link_to 'Edit', edit_house_path(house) %> |
+            <%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Public</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<!--Join an existing house or create a new one-->
+<div class="span4 well">
+    <p class="lead text-center">Join an existing house</p>
+    <%= form_tag pre_join_houses_path, method: "get" do %>
+      <%= text_field_tag :name, nil, class: "input-block-level", placeholder: "Enter house name" %>
+      <%= submit_tag "Move in", class: "btn btn-primary" %>
+    <% end %>
 
-<% @houses.each do |house| %>
-  <tr>
-    <td><%= house.name %></td>
-    <td><%= house.public %></td>
-    <td><%= link_to 'Show', house %></td>
-    <td><%= link_to 'Edit', edit_house_path(house) %></td>
-    <td><%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New House', new_house_path %>
+    <hr>
+    <p class="lead text-center">or create a new one</p>
+    <%= render 'form' %>    
+</div>
+</div>

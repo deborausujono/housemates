@@ -9,7 +9,8 @@ class Person < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :public
 
   # Associations
-  belongs_to :house
+  has_many :memberships
+  has_many :houses, through: :memberships
 
   # Validations
   validates :name, presence: true

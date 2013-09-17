@@ -24,7 +24,7 @@ Housemates::Application.routes.draw do
   devise_for :people
 
   authenticated :person do
-    root to: "notes#index"
+    root to: "houses#index"
   end
 
   root to: "welcome#index"
