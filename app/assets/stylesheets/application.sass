@@ -14,6 +14,7 @@
 
 //Variables
 $linkColor: rgb(132, 215, 103)
+$navbarBrandColorHover: #f89406
 $medium-width: 50%
 
 //Imports
@@ -32,14 +33,34 @@ body
 	max-width: $medium-width
 
 //Other components
-.navbar-inverse
+.navbar
 	.brand
 		font:
 			size: 32px
 		color: #f89406
+	a.brand:hover
+		color: #f89406
+
+ul.nav
+	li.dropdown
+		a
+			padding:
+				top: 5px
+				bottom: 5px
+
+.caret
+	vertical-align: text-top
+
+h4
+	a
+		color: $black	
 
 textarea
 	width: 90%
+
+a.remember-me
+	color: $white
+	text-decoration: none
 
 //Imports
 @import "bootstrap-responsive"
