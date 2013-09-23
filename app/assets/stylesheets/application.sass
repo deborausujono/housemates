@@ -13,15 +13,17 @@
  */
 
 //Variables
-$linkColor: rgb(132, 215, 103)
+$linkColor: #84d767
 $navbarBrandColorHover: #f89406
 $medium-width: 50%
 
 //Imports
 @import "bootstrap"
+@import "compass"
 
 body
 	padding-top: 90px
+	background-color: #def4c8
 
 //Containers
 .container-fluid
@@ -33,13 +35,21 @@ body
 	max-width: $medium-width
 
 //Other components
-.navbar
+////Navbar
+.navbar-inverse
+	.navbar-inner
+		background-color: #3a3a3a
+		@include filter-gradient(#3a3a3a, #3a3a3a, vertical)
+		@include background-image(linear-gradient(top,  #3a3a3a 0%,#212121 25%,#212121 75%,#3a3a3a 100%))
 	.brand
 		font:
 			size: 32px
 		color: #f89406
 	a.brand:hover
 		color: #f89406
+	ul.nav
+		font:
+			size: 13px
 
 ul.nav
 	li.dropdown
@@ -48,19 +58,21 @@ ul.nav
 				top: 5px
 				bottom: 5px
 
+.remember-me
+	color: $white
+	text-decoration: none
+
 .caret
 	vertical-align: text-top
 
+////House#index
 h4
 	a
-		color: $black	
+		color: $black
 
+////House#show
 textarea
-	width: 90%
-
-a.remember-me
-	color: $white
-	text-decoration: none
+	width: 90%	
 
 //Imports
 @import "bootstrap-responsive"
