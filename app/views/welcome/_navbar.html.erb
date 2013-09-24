@@ -1,0 +1,18 @@
+<%= form_for resource,
+             as: resource_name,
+             url: session_path(resource_name),
+             html: { class: "navbar-form pull-right" } do |f| %>
+              
+  <%= f.email_field :email, class: "span2", placeholder: "Email" %>
+
+  <%= f.password_field :password, class: "span2", placeholder: "Password" %>
+
+  <% if devise_mapping.rememberable? -%>
+    <%= f.label :remember_me, class: "checkbox inline" do %>
+    <%= f.check_box :remember_me %>
+      <div class="remember-me">Remember me</div>
+    <% end %>
+  <% end -%>
+
+  <%= f.submit "Sign in", class: "btn" %>
+<% end %>

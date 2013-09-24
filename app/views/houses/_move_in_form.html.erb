@@ -1,0 +1,9 @@
+<p class="lead text-center">Join an existing house</p>
+<%= form_tag pre_join_houses_path, method: "get" do %>
+  <%= text_field_tag :name, nil, class: "input-block-level", placeholder: "Enter house name" %>
+  <%= submit_tag "Move in", class: "btn btn-primary" %>
+<% end %>
+
+<hr>
+<p class="lead text-center">or create a new one</p>
+<%= render partial: 'form', locals: { new_house: true } %> 
