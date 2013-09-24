@@ -13,9 +13,10 @@
  */
 
 //Variables
-$linkColor: #84d767
+$linkColor: #53A93F
 $navbarBrandColorHover: #f89406
 $medium-width: 50%
+$bodyBackground: #def4c8
 
 //Imports
 @import "bootstrap"
@@ -23,7 +24,6 @@ $medium-width: 50%
 
 body
 	padding-top: 90px
-	background-color: #def4c8
 
 //Containers
 .container-fluid
@@ -34,6 +34,10 @@ body
 	margin: auto
 	max-width: $medium-width
 
+.well
+	background-color: $white
+	border: 0
+
 //Navbar
 .navbar-inverse
 	.navbar-inner
@@ -41,14 +45,12 @@ body
 		@include filter-gradient(#3a3a3a, #3a3a3a, vertical)
 		@include background-image(linear-gradient(top,  #3a3a3a 0%,#212121 25%,#212121 75%,#3a3a3a 100%))
 	.brand
-		font:
-			size: 32px
+		font-size: 32px
 		color: #f89406
 	a.brand:hover
 		color: #f89406
 	ul.nav
-		font:
-			size: 13px
+		font-size: 13px
 
 ul.nav
 	li.dropdown
