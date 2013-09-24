@@ -2,19 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$gray: #f5f5f5
-
-li.note-cell:hover
-	background-color: $gray
-
-.thumbnail
-	border: 0
-	box-shadow: none
+@import "bootstrap/variables"
 
 ul.thumbnails
-	li.note-cell:nth-child(3n+4)
-		clear: left
-		margin-left: 0
+	li
+		&.note-cell
+			&:nth-child(3n+4)
+				clear: left
+				margin-left: 0
+
+			&:hover
+				background-color: $grayLighter
+
+		.thumbnail
+			border: 0
+			box-shadow: none
+
+//Houses#index
+h4
+	a
+		color: $black
+
+//Houses#show
+textarea
+	width: 90%	
 
 p.signature
-	color: darken($gray, 50%)
+	color: $gray

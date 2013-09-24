@@ -1,43 +1,5 @@
 class NotesController < ApplicationController
-  # GET /notes
-  # GET /notes.json
-  def index
-    unless current_person.house
-      redirect_to move_in_houses_path
-    else
-      @notes = current_person.house.notes
-      @note = Note.new
 
-      respond_to do |format|
-        format.html # index.html.erb
-        format.json { render json: @notes }
-      end
-    end
-  end
-
-  # GET /notes/1
-  # GET /notes/1.json
-  def show
-    @note = Note.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @note }
-    end
-  end
-
-  # GET /notes/new
-  # GET /notes/new.json
-  def new
-    @note = Note.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @note }
-    end
-  end
-
-  # GET /notes/1/edit
   def edit
     @note = Note.find(params[:id])
 

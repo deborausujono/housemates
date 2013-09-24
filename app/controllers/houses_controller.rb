@@ -28,17 +28,6 @@ class HousesController < ApplicationController
     end
   end
 
-  # GET /houses/new
-  # GET /houses/new.json
-  def new
-    @house = House.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @house }
-    end
-  end
-
   # GET /houses/1/edit
   def edit
     @house = House.find(params[:id])

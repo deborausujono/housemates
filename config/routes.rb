@@ -1,13 +1,13 @@
 Housemates::Application.routes.draw do
   get "welcome/index"
 
-  resources :notes do
+  resources :notes, except: [:index, :show, :new] do
     member do
       get :cancel_edit
     end
   end
 
-  resources :houses do
+  resources :houses, except: :new do
     member do
       get :join
       get :leave

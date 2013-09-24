@@ -15,5 +15,10 @@
   <%= f.label :public, class: "checkbox" do %>
     <%= f.check_box :public %> Anyone can move into the house, no approval necessary
   <% end %>
-  <%= f.submit "Create house and move in", class: "btn" %>
+  <% if new_house %>
+    <%= f.submit "Create house and move in", class: "btn" %>
+  <% else %>
+    <%= f.submit "Save", class: "btn" %>
+  <% end %>
+  
 <% end %>
