@@ -1,10 +1,27 @@
 <li class="span4 note-cell">
   <div class="thumbnail">
-    <h4><%= link_to house.name, house %></h4>
-    <p><% house.people.take(5).each do |resident| %>
-      <%= gravatar_for resident %>
-    <% end %></p>
-    <%= link_to 'Edit', edit_house_path(house) %> |
-    <%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %>
+  	<!--Header-->
+    <div class="row-fluid cell-header">
+      <div class="span9">
+        <h4><%= link_to house.name, house %></h4>
+        <small class="byline"><%= pluralize house.people.count, 'resident' %></small>
+      </div>
+      <div class="span3 text-right">
+        <div id="house-option-links">
+          <%= link_to raw('<i class="icon-wrench"></i>'),
+                      edit_house_path(house) %>
+          <%= link_to raw('<i class="icon-remove"></i>'),
+                      '#confirm-delete-house', id: 'delete-house-link',
+                      data: { path: "../houses/#{house.id}", toggle: 'modal' } %>
+        </div>
+      </div>
+    </div>
+
+    <!--Body-->
+    <div class="row-fluid">
+      <% house.people.take(5).each do |resident| %>
+        <%= gravatar_for resident %>
+      <% end %>
+    </div>
   </div>
 </li>

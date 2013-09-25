@@ -1,14 +1,22 @@
-<p class="text-right" id="option-links">
-  <%= link_to raw('<i class="icon-pencil" id="edit-note-link"></i>'),
-              edit_note_path(note),
-              remote: true %>
-  <%= link_to raw('<i class="icon-remove"></i>'),
-              '#confirm-delete', id: 'delete-link',
-              data: { path: "../notes/#{note.id}", toggle: 'modal' } %>
-</p>
-<p id="option-links-filler"><br></p>
-<p><%= note.text %></p>
-<p class="text-right signature">
-  <small><%= note.person.name %></small><br>
-  <small><%= note.updated_at.strftime "%b %e, %Y at %l:%M%P" %></small>
-</p>
+<!--Note header-->
+<div class="row-fluid cell-header">
+  <div class="span9">
+    <h4><%= note.person.name %></h4>
+    <small class="byline"><%= note.updated_at.strftime "%b %e, %Y at %l:%M%P" %></small>
+  </div>
+  <div class="span3 text-right">
+    <div id="option-links">
+      <%= link_to raw('<i class="icon-pencil" id="edit-note-link"></i>'),
+                  edit_note_path(note),
+                  remote: true %>
+      <%= link_to raw('<i class="icon-remove"></i>'),
+                  '#confirm-delete', id: 'delete-link',
+                  data: { path: "../notes/#{note.id}", toggle: 'modal' } %>
+    </div>
+  </div>
+</div>
+
+<!--Note body-->
+<div class="row-fluid">
+  <%= note.text %>
+</div>
