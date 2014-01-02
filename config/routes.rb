@@ -1,5 +1,4 @@
 Housemates::Application.routes.draw do
-  get "welcome/index"
 
   resources :notes, except: [:index, :show, :new] do
     member do

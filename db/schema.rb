@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20130917205557) do
     t.integer  "house_id"
   end
 
+  add_index "notes", ["house_id"], :name => "index_notes_on_house_id"
   add_index "notes", ["person_id"], :name => "index_notes_on_person_id"
 
   create_table "people", :force => true do |t|

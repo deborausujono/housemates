@@ -5,7 +5,28 @@
 @import "bootstrap/variables"
 
 h1
-	color: darken(#def4c8, 25%)
+	color: #ffffff
+	font-weight: normal
+	font-size: 30px
+	text-align: center
+	line-height: 1
 
-.welcome-icon
-	vertical-align: middle
+.box-container
+	.box
+		float: left
+		height: 130px
+		width: 130px
+		background-color: #81c429
+		margin: 5px
+		font-size: 100px
+		text-align: center
+		padding-top: 15px
+		line-height: 1.2
+
+	> :nth-child(even)
+		background-color: #f89406
+
+	.box-leftmost
+		clear: both
+		margin-left: 15%
+		
